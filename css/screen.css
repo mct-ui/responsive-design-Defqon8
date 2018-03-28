@@ -2,6 +2,24 @@
   #FONTS
 \*------------------------------------*/
 
+@font-face {
+    font-family: "HK Grotesk Web";
+    font-weight: 200;
+    src: url("../fonts/hkgrotesk-light-webfont.woff2") format("woff2"), url("../fonts/hkgrotesk-light-webfont.woff") format("woff");
+}
+
+@font-face {
+    font-family: "HK Grotesk Web";
+    font-weight: 400;
+    src: url("../fonts/hkgrotesk-regular-webfont.woff2") format("woff2"), url("../fonts/hkgrotesk-regular-webfont.woff") format("woff");
+}
+
+@font-face {
+    font-family: "HK Grotesk Web";
+    font-weight: 600;
+    src: url("../fonts/hkgrotesk-medium-webfont.woff") format("woff"), url("../fonts/hkgrotesk-medium-webfont.woff2") format("woff2");
+}
+
 /*------------------------------------*\
   #GENERIC
 \*------------------------------------*/
@@ -15,16 +33,14 @@
 html {
     font-size: 16px;
     line-height: 1.5;
-    font-family: Helvetica, arial, sans-serif;
-    color: #111;
+    font-family: "HK Grotesk Web", Helvetica, arial, sans-serif;
+    color: #202024;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-*,
-*:before,
-*:after {
+*, *:before, *:after {
     box-sizing: inherit;
 }
 
@@ -36,13 +52,13 @@ html {
  */
 
 ::-moz-selection {
-    background: #e85e00;
+    background: #5051DB;
     color: white;
     text-shadow: none;
 }
 
 ::selection {
-    background: #e85e00;
+    background: #5051DB;
     color: white;
     text-shadow: none;
 }
@@ -68,6 +84,10 @@ img {
     Default markup for typographic elements
 */
 
+h1, h2, h3 {
+    font-weight: 200;
+}
+
 h1 {
     font-size: 36px;
     line-height: 48px;
@@ -86,31 +106,21 @@ h3 {
     margin: 0 0 24px;
 }
 
-h4,
-h5,
-h6 {
+h4, h5, h6 {
     font-size: 20px;
     line-height: 24px;
     margin: 0 0 24px;
 }
 
-p,
-ol,
-ul,
-dl,
-table,
-address,
-figure {
+p, ol, ul, dl, table, address, figure {
     margin: 0 0 24px;
 }
 
-ul,
-ol {
+ul, ol {
     padding-left: 24px;
 }
 
-li ul,
-li ol {
+li ul, li ol {
     margin-bottom: 0;
 }
 
@@ -141,24 +151,51 @@ hr {
     margin: 0 0 24px;
 }
 
-a {
-    color: RoyalBlue;
+a, a:visited, a:active, a:hover, a:focus {
+    color: #3E3EA8;
     transition: all .1s ease-in-out;
-}
-
-a:visited,
-a:active {
-    color: BlueViolet;
-}
-
-a:hover,
-a:focus {
-    color: Crimson;
 }
 
 /*------------------------------------*\
   #OBJECTS
 \*------------------------------------*/
+
+/*
+    Objects: section
+    ---
+    Creates vertical whitespace between adjacent sections inside a row
+*/
+
+.o-section {
+    overflow: auto;
+}
+
+.o-section+.o-section {
+    margin-top: 24px;
+}
+
+@media (min-width: 768px) {
+    .o-section--lg+.o-section--lg, .o-section--xl+.o-section--xl {
+        margin-top: 48px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .o-section--xl+.o-section--xl {
+        margin-top: 72px;
+    }
+}
+
+/*
+    Objects: List
+    ---
+    Small reusable object to remove default list styling from lists
+*/
+
+.o-list {
+    list-style: none;
+    padding: 0;
+}
 
 /*
     Objects: Row
@@ -179,14 +216,21 @@ a:focus {
 }
 
 @media (min-width: 768px) {
+    html {
+        font-size: 20px;
+        line-height: 1.6;
+    }
     .o-row {
         padding-left: 48px;
         padding-right: 48px;
     }
-
     .o-row--lg {
         padding-top: 72px;
         padding-bottom: 48px;
+    }
+    .o-row--md {
+        padding-top: 48px;
+        padding-bottom: 24px;
     }
 }
 
@@ -199,7 +243,8 @@ a:focus {
 .o-container {
     margin-left: auto;
     margin-right: auto;
-    max-width: 90em; /* 90 * 16px = 1440px */
+    max-width: 56.4em;
+    /* 90 * 16px = 1440px */
 }
 
 /*
@@ -217,9 +262,9 @@ a:focus {
     flex-wrap: wrap;
 }
 
-    .o-layout__item {
-        width: 100%;
-    }
+.o-layout__item {
+    width: 100%;
+}
 
 /* gutter modifiers, these affect o-layout__item too */
 
@@ -227,7 +272,7 @@ a:focus {
     margin: 0 -12px;
 }
 
-.o-layout--gutter > .o-layout__item {
+.o-layout--gutter>.o-layout__item {
     padding: 0 12px;
 }
 
@@ -235,7 +280,7 @@ a:focus {
     margin: 0 -6px;
 }
 
-.o-layout--gutter-sm > .o-layout__item {
+.o-layout--gutter-sm>.o-layout__item {
     padding: 0 6px;
 }
 
@@ -243,7 +288,7 @@ a:focus {
     margin: 0 -24px;
 }
 
-.o-layout--gutter-lg > .o-layout__item {
+.o-layout--gutter-lg>.o-layout__item {
     padding: 0 24px;
 }
 
@@ -323,9 +368,111 @@ a:focus {
   #COMPONENTS
 \*------------------------------------*/
 
+/*
+    Component: header
+    ---
+    Main header of the website
+*/
+
+.c-header__nav {
+    display: none;
+}
+
+.c-header__logo {}
+
+@media (min-width: 992px) {
+    .c-header {
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .c-header__nav {
+        display: block;
+    }
+}
+
+/*
+    Component: Nav
+    ---
+    Main navigation of the site
+*/
+
+.c-nav {
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.c-nav__link {
+    text-decoration: none;
+    font-weight: 400;
+    padding: 8px 0;
+    display: block;
+}
+
+.c-nav__link, .c-nav__link:visited, .c-nav__link:active {
+    color: #202024;
+}
+
+.c-nav__link:hover, .c-nav__link:focus {
+    color: #5051db;
+}
+
+.c-nav--meta {
+    font-size: 16px;
+}
+
+.c-nav__link--meta, .c-nav__link--meta:visited, .c-nav__link--meta:active {
+    color: #6C6C75;
+}
+
+@media (min-width: 768px) {
+    .c-nav__list {
+        display: -webkit-flex;
+        display: -ms-flex;
+        display: flex;
+        margin-left: -16px;
+        margin-right: -16px;
+    }
+    .c-nav__link {
+        padding: 8px 16px;
+    }
+}
+
+/*
+    Component: Logo
+    ---
+    Website main logo
+*/
+
+.c-logo {
+    height: 32px;
+}
+
+.c-logo__symbol {
+    height: 100%
+}
+
+@media (min-width: 768px) {
+    .c-logo {
+        height: 40px;
+    }
+}
+
 /*------------------------------------*\
   #UTILITIES
 \*------------------------------------*/
+
+/*
+    Utilities: spacing
+    ---
+    Utility classes to put specific margins and paddings onto elements
+*/
+
+.u-pt-clear {
+    padding-top: 0;
+}
 
 /*
     Utilities: max-width
@@ -596,9 +743,7 @@ a:focus {
 */
 
 @media print {
-    *,
-    *:before,
-    *:after {
+    *, *:before, *:after {
         background: transparent !important;
         color: #000 !important;
         /* Black prints faster:
@@ -606,8 +751,7 @@ a:focus {
         box-shadow: none !important;
         text-shadow: none !important;
     }
-    a,
-    a:visited {
+    a, a:visited {
         text-decoration: underline;
     }
     a[href]:after {
@@ -620,15 +764,13 @@ a:focus {
      * Don't show links that are fragment identifiers,
      * or use the `javascript:` pseudo protocol
      */
-    a[href^="#"]:after,
-    a[href^="javascript:"]:after {
+    a[href^="#"]:after, a[href^="javascript:"]:after {
         content: "";
     }
     pre {
         white-space: pre-wrap !important;
     }
-    pre,
-    blockquote {
+    pre, blockquote {
         border: 1px solid #999;
         page-break-inside: avoid;
     }
@@ -639,18 +781,14 @@ a:focus {
     thead {
         display: table-header-group;
     }
-    tr,
-    img {
+    tr, img {
         page-break-inside: avoid;
     }
-    p,
-    h2,
-    h3 {
+    p, h2, h3 {
         orphans: 3;
         widows: 3;
     }
-    h2,
-    h3 {
+    h2, h3 {
         page-break-after: avoid;
     }
 }
